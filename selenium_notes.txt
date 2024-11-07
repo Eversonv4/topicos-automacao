@@ -1,0 +1,143 @@
+Localizando elementos
+
+OBS: Adicionar mais exemplos
+
+find_elements (By)
+  - ID = "algum id"
+  - NAME = "atributo name"
+  - XPATH = "xpath"
+  - LINK_TEXT = "link text"
+  - PARTIAL_LINK_TEXT = "partial link text"
+  - TAG_NAME = "tag name"
+  - CLASS_NAME = "class name"
+  - CSS_SELECTOR = "css selector"
+
+  ID
+    Ex: <html>
+          <body>
+            <form id="loginForm">
+            <input name="username" type="text" />
+            <input name="password" type="password" />
+            <input name="continue" type="submit" value="Login" />
+            </form>
+          </body>
+        </html>
+
+    // python
+    login_form = driver.find_element(By.ID, "loginForm")
+
+  NAME
+    Ex: <html>
+          <body>
+            <form id="loginForm">
+            <input name="username" type="text" />
+            <input name="password" type="password" />
+            <input name="continue" type="submit" value="Login" />
+            <input name="continue" type="button" value="Clear" />
+            </form>
+          </body>
+        </html>
+
+    // python
+    username = driver.find_element(By.NAME, "username")
+    password = driver.find_element(By.NAME, "password")
+
+  XPATH
+    Ex: <html>
+          <body>
+            <form id="loginForm">
+            <input name="username" type="text" />
+            <input name="password" type="password" />
+            <input name="continue" type="submit" value="Login" />
+            <input name="continue" type="button" value="Clear" />
+            </form>
+          </body>
+        </html>
+
+    // python (são 3 formas de fazer de pegar o mesmo elemeto "<form>")
+    login_form = driver.find_element(By.XPATH, "/html/body/form[1]")
+    login_form = driver.find_element(By.XPATH, "//form[1]")
+    login_form = driver.find_element(By.XPATH, "//form[@id='loginForm']")
+
+  XPATH
+    Ex: <html>
+          <body>
+            <form id="loginForm">
+            <input name="username" type="text" />
+            <input name="password" type="password" />
+            <input name="continue" type="submit" value="Login" />
+            <input name="continue" type="button" value="Clear" />
+            </form>
+          </body>
+        </html>
+
+    // python (são formas de fazer de pegar o mesmo elemeto)
+    login_form = driver.find_element(By.XPATH, "/html/body/form[1]")
+    login_form = driver.find_element(By.XPATH, "//form[1]")
+    login_form = driver.find_element(By.XPATH, "//form[@id='loginForm']")
+
+    username = driver.find_element(By.XPATH, "//form[input/@name='username']")
+    username = driver.find_element(By.XPATH, "//form[@id='loginForm']/input[1]")
+    username = driver.find_element(By.XPATH, "//input[@name='username']")
+
+    clear_button = driver.find_element(By.XPATH, "//input[@name='continue'][@type='button']")
+    clear_button = driver.find_element(By.XPATH, "//form[@id='loginForm']/input[4]")
+
+  LINK_TEXT
+    Localizando hyperlinks by link text
+
+    Ex: <html>
+          <body>
+            <p>Are you sure you want to do this?</p>
+            <a href="continue.html">Continue</a>
+            <a href="cancel.html">Cancel</a>
+          </body>
+        </html>
+
+    // python
+    continue_link = driver.find_element(By.LINK_TEXT, 'Continue')
+
+  PARTIAL_LINK_TEXT
+    Localizando hyperlinks by link text
+
+    Ex: <html>
+          <body>
+            <p>Are you sure you want to do this?</p>
+            <a href="continue.html">Continue</a>
+            <a href="cancel.html">Cancel</a>
+          </body>
+        </html>
+
+    // python
+    continue_link = driver.find_element(By.PARTIAL_LINK_TEXT, 'Continue')
+
+    TAG_NAME
+      Ex:   <html>
+              <body>
+                <h1>Welcome</h1>
+                <p>Site content goes here.</p>
+              </body>
+            </html>
+
+      // python
+      heading1 = driver.find_element(By.TAG_NAME, "h1")
+
+    CLASS_NAME
+      Ex:   <html>
+              <body>
+                <p class="content">Site content goes here</p>
+              </body>
+            </html>
+
+      // python
+      content = driver.find_element(By.CLASS_NAME, "content")
+
+    CSS_SELECTOR
+      Ex:   <html>
+              <body>
+                <p class="content">Site content goes here</p>
+              </body>
+            </html>
+
+      // python
+      content = driver.find_element(By.CLASS_NAME, "p.content")
