@@ -1,14 +1,17 @@
+// Leitor de mp3
 interface OldMediaPlayer {
     void playMp3(String filename);
 }
 
-class OldMediaPlayerImpl implements OldMediaPlayer {
+class OldMediaPlayerImplementation implements OldMediaPlayer {
     @Override
     public void playMp3(String filename) {
         System.out.println("Tocando arquivo MP3: " + filename);
     }
 }
+// -------------
 
+// Adapter
 interface MediaPlayer {
     void play(String audioType, String filename);
 }
@@ -17,7 +20,7 @@ class MediaAdapter implements MediaPlayer {
     private OldMediaPlayer oldMediaPlayer;
 
     public MediaAdapter() {
-        this.oldMediaPlayer = new OldMediaPlayerImpl();
+        this.oldMediaPlayer = new OldMediaPlayerImplementation();
     }
 
     @Override
@@ -29,6 +32,7 @@ class MediaAdapter implements MediaPlayer {
         }
     }
 }
+// -------------
 
 class AudioPlayer implements MediaPlayer {
     private MediaAdapter mediaAdapter;
@@ -47,7 +51,7 @@ class AudioPlayer implements MediaPlayer {
     }
 }
 
-public class AdapterPatternDemo {
+class AdapterPatternDemo {
     public static void main(String[] args) {
         AudioPlayer audioPlayer = new AudioPlayer();
 
