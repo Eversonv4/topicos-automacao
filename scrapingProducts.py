@@ -10,7 +10,7 @@ def get_products_url(browser, url):
   browser.get(url)
 
   product_a_tags = browser.find_elements(By.CSS_SELECTOR, '[itemprop="url"]')
-  product_a_tags = product_a_tags[:MAX_QUANTITY_OF_PRODUCTS] # Apagar linha depois
+  product_a_tags = product_a_tags[:MAX_QUANTITY_OF_PRODUCTS]
 
   product_links = []
 
@@ -28,7 +28,6 @@ def fetch_product_and_get_data(browser, link, category_name):
     product_price = browser.find_element(By.CSS_SELECTOR, '.font-title-s.color-primary').text
     product_name = browser.find_element(By.XPATH, '//*[@id="__layout"]/div/div/main/main/div[1]/section[1]/div[1]/div/div/div[2]/div[2]/header/h1').text
     image_url = browser.find_element(By.CSS_SELECTOR, '[datatest-id="main-img"]').get_attribute('src')
-    categoria = category_name
 
   except Exception as e:
     print("Produto está com informações incompletas")
@@ -38,14 +37,14 @@ def fetch_product_and_get_data(browser, link, category_name):
     "Nome": product_name,
     "Preco": product_price,
     "Imagem": image_url,
-    "Categoria": categoria
+    "Categoria": category_name
   }
 
 def get_scraped_data(browser, category):
   products_data = []
 
   product_links = get_products_url(browser, category['url'])
-  product_links = product_links[:MAX_QUANTITY_OF_PRODUCTS] # Apagar linha depois
+  product_links = product_links[:MAX_QUANTITY_OF_PRODUCTS]
 
   for product_link in product_links:
     product_data = fetch_product_and_get_data(browser, product_link, category['category'])
@@ -73,7 +72,6 @@ def main():
     products_data = get_scraped_data(browser, category)
     save_scraped_data_as_cvs(products_data, category)
 
-
-  # browser.quit()
+  browser.quit()
 
 main()
